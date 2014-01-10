@@ -12,6 +12,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y lxc-docker linux-image-extra-`
 sh -c "echo 'docker' > /etc/hostname"
 sh -c "echo '127.0.0.1 docker' >> /etc/hosts"
 service hostname restart
+sh -c "git clone https://github.com/kstaken/dockerfile-examples.git /root/dockerfile-examples"
 EOF
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -19,6 +20,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "http://files.fibr.io/vagrant-virtualbox-raring64.box"
   config.vm.box_url = "http://cloud-images.ubuntu.com/raring/current/raring-server-cloudimg-vagrant-amd64-disk1.box"
   config.vm.provision "shell", inline: $provisioning_script
-  config.vm.network :private_network, ip: "1.2.3.4", :netmask => "255.255.255.0"
-  config.vm.network :public_network
+  #config.vm.network :private_network, ip: "1.2.3.4", :netmask => "255.255.255.0"
+  #config.vm.network :public_network
 end
